@@ -37,7 +37,7 @@ npm run build && npm start
 
 | Variable | Rôle |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Domaine de production (URL canoniques, sitemap, Open Graph) |
+| `NEXT_PUBLIC_SITE_URL` | Domaine de production (URL canoniques, sitemap, Open Graph). Facultatif sur Vercel : à défaut, le domaine de production Vercel (`VERCEL_PROJECT_PRODUCTION_URL`, fourni automatiquement) est utilisé |
 | `NEXT_PUBLIC_CONTACT_PHONE` | Téléphone du bureau marocain (masqué si vide) |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | E-mail du bureau marocain (masqué si vide) |
 | `CONTACT_WEBHOOK_URL` | **Serveur uniquement.** Point de réception des demandes (POST JSON) |
@@ -53,7 +53,7 @@ Champs transmis : `name`, `company`, `email`, `phone`, `service`, `message`, `so
 ## Déploiement (Vercel)
 
 1. Pousser ce dossier sur un dépôt GitHub.
-2. Vercel → *Add New Project* → importer le dépôt. Si le dépôt contient aussi les PDF, définir **Root Directory = `customs-wise-maroc`**.
+2. Vercel → *Add New Project* → importer le dépôt `customs-wise-maroc`. L'application est à la racine du dépôt : laisser **Root Directory = `./`**.
 3. Framework : Next.js (détecté). Build : `npm run build`. Node 20+.
 4. Ajouter les variables d'environnement ci-dessus (Production et Preview).
 5. Déployer, puis relier le domaine définitif et mettre à jour `NEXT_PUBLIC_SITE_URL`.
