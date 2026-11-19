@@ -34,6 +34,17 @@ export const site = {
     },
   },
   mainSite: "https://www.customswise.ie",
+  /**
+   * Launch status. Anything other than "live" shows a site-wide notice that the
+   * Moroccan activity is being launched, so the site is not read as confirmation
+   * that operations have started. Set NEXT_PUBLIC_SITE_STATUS=live once approved.
+   */
+  isLive: process.env.NEXT_PUBLIC_SITE_STATUS === "live",
+  analytics: {
+    gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "",
+    // Ignored when a GTM container is configured (configure GA4 inside GTM instead) to avoid double counting
+    ga4Id: process.env.NEXT_PUBLIC_GTM_ID ? "" : (process.env.NEXT_PUBLIC_GA_ID ?? ""),
+  },
 } as const;
 
 export function absoluteUrl(path = "/") {
@@ -47,6 +58,7 @@ export function telHref(phone: string) {
 export const nav = [
   { href: "/", label: "Accueil" },
   { href: "/services", label: "Services" },
+  { href: "/about", label: "À propos" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },

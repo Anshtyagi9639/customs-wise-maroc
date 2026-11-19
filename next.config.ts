@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // Slug renamed before launch (former name of the compliance service)
+  async redirects() {
+    return [
+      {
+        source: "/services/conformite-reglementaire",
+        destination: "/services/conformite-douaniere",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -6,7 +6,7 @@ import type { ServiceIcon } from "@/lib/services";
 type Variant = "primary" | "secondary" | "light" | "ghost";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent-600 text-white hover:bg-accent-700 shadow-sm",
+  primary: "bg-cargo text-navy-950 hover:bg-haul shadow-sm",
   secondary: "bg-navy-900 text-white hover:bg-navy-800 shadow-sm",
   light: "bg-white text-navy-900 hover:bg-navy-50 shadow-sm",
   ghost: "border border-white/40 text-white hover:bg-white/10",

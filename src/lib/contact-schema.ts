@@ -19,15 +19,17 @@ export const contactSchema = z.object({
     .regex(/^[+\d\s().-]*$/, "Numéro de téléphone invalide.")
     .optional()
     .or(z.literal("")),
-  service: z.enum(serviceValues, { message: "Veuillez choisir un service." }),
+  service: z.enum(serviceValues, { message: "Veuillez choisir un type de demande." }),
+  origin: z.string().trim().max(120).optional().or(z.literal("")),
+  destination: z.string().trim().max(120).optional().or(z.literal("")),
   message: z
     .string()
     .trim()
     .min(10, "Décrivez brièvement vos marchandises et votre itinéraire (10 caractères minimum).")
     .max(4000),
   consent: z.literal(true, { message: "Votre accord est nécessaire pour que nous puissions vous répondre." }),
-  /** Honeypot — must stay empty */
-  website: z.string().max(0).optional().or(z.literal("")),
+  /** Honeypot — humans leave it empty; a filled value is silently discarded by the server action */
+  website: z.string().max(500).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;

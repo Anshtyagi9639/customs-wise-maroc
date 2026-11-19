@@ -26,7 +26,7 @@ Après une période pilote du 18 mai au 15 juin 2026, le déploiement effectif d
 
 ### Une dématérialisation déjà bien avancée
 
-Ce lancement s'inscrit dans une dynamique engagée depuis plusieurs années. Selon les données officielles publiées fin 2025, le taux de dématérialisation des procédures du commerce extérieur atteignait **96 %**. Environ 120 services étaient alors digitalisés et une cinquantaine d'institutions connectées à PortNet.
+Ce lancement s'inscrit dans une dynamique engagée depuis plusieurs années. Selon des données officielles relayées par la presse fin 2025, le taux de dématérialisation des procédures du commerce extérieur atteignait **96 %**. Environ 120 services étaient alors digitalisés et une cinquantaine d'institutions connectées à PortNet.
 
 Des documents comme le **Bon à délivrer électronique** ont déjà la même valeur juridique que leur version papier.
 
@@ -34,7 +34,7 @@ Des documents comme le **Bon à délivrer électronique** ont déjà la même va
 
 ADiL (Assistant au Dédouanement des marchandises à l'Importation en Ligne) est l'outil d'information tarifaire de l'ADII. Il est accessible gratuitement depuis le portail de la douane : [www.douane.gov.ma/adil](https://www.douane.gov.ma/adil).
 
-En **octobre 2026**, l'ADII a mis en ligne une nouvelle version de l'outil.
+En **octobre 2026**, l'ADII a annoncé, par communiqué repris par la presse, la mise en ligne d'une nouvelle version de l'outil.
 
 ### Les principales nouveautés
 
@@ -93,10 +93,17 @@ Mais un outil numérique ne vaut que par la qualité des données qu'on y saisit
 
 ## Sources
 
+### Sources officielles
+
 - PortNet : [Le Maroc lance son portail national unique du commerce extérieur](https://www.portnet.ma/en/web/portail-federateur/b/le-maroc-lance-son-portail-national-unique-du-commerce-exterieur)
 - Maroc.ma : [Lancement du Portail marocain des procédures du commerce extérieur](https://www.maroc.ma/fr/actualites/lancement-du-portail-marocain-des-procedures-du-commerce-exterieur)
+- Administration des Douanes et Impôts Indirects (ADII) : [www.douane.gov.ma](https://www.douane.gov.ma) — outil ADiL : [www.douane.gov.ma/adil](https://www.douane.gov.ma/adil)
+
+### Presse
+
 - LesEco.ma : [Casablanca : lancement du Portail marocain des procédures du commerce extérieur](https://leseco.ma/maroc/casablanca-lancement-du-portail-marocain-des-procedures-du-commerce-exterieur.html)
 - Hespress : [Commerce extérieur : 96 % de numérisation et 43 % de gain sur les délais](https://fr.hespress.com/445158-445158.html)
 - Hespress : [Douane : l'assistant en ligne ADIL fait peau neuve](https://fr.hespress.com/491429-douane-lassistant-en-ligne-adil-fait-peau-neuve.html) (8 octobre 2026)
-- EcoActu : [ADII : l'assistant au dédouanement ADIL](https://ecoactu.ma/adii-assistant-au-dedouanement-importation-ligne-adil/) (8 octobre 2026)
-- Administration des Douanes et Impôts Indirects (ADII) : [www.douane.gov.ma](https://www.douane.gov.ma)
+- EcoActu : [ADII : l'assistant au dédouanement ADIL](https://ecoactu.ma/adii-assistant-au-dedouanement-importation-ligne-adil/) (8 octobre 2026) — reprend le communiqué de l'ADII.
+
+*Les chiffres cités sont ceux annoncés par les organismes concernés ; ils ne constituent pas une mesure indépendante.*

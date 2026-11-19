@@ -4,6 +4,13 @@ export type Service = {
   slug: string;
   number: number;
   title: string;
+  /** <title> (page suffix " | Customs Wise Maroc" is added automatically) */
+  metaTitle: string;
+  metaDescription: string;
+  /** One-sentence answer to "what is this service?" (hero + AI/answer engines) */
+  lead: string;
+  /** FAQ ids (src/lib/faq.ts) relevant to this service */
+  faqIds: string[];
   /** Short text for the homepage card */
   summary: string;
   icon: ServiceIcon;
@@ -17,6 +24,11 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "declarations-douanieres",
+    metaTitle: "Déclarations douanières au Maroc : import et export",
+    metaDescription:
+      "Déclarations d'import et d'export : classification tarifaire, valeur en douane, origine et droits applicables entre le Maroc, l'UE et le Royaume-Uni.",
+    lead: "Nous aidons les entreprises à préparer leurs déclarations d'importation et d'exportation : classification tarifaire, valeur en douane, origine des marchandises et régimes applicables.",
+    faqIds: ["documents-dedouanement", "calcul-droits-de-douane", "representation-directe-indirecte"],
     number: 1,
     title: "Déclarations douanières",
     summary:
@@ -44,6 +56,11 @@ export const services: Service[] = [
   },
   {
     slug: "assistance-documentaire",
+    metaTitle: "Assistance documentaire import-export au Maroc",
+    metaDescription:
+      "Factures, listes de colisage, documents de transport, certificats d'origine et SPS : vérifiez vos documents avant d'expédier entre le Maroc, l'UE et le R.-U.",
+    lead: "Nous vérifions et préparons avec vous les documents commerciaux, de transport et d'origine qui accompagnent vos marchandises, avant l'expédition.",
+    faqIds: ["documents-dedouanement"],
     number: 2,
     title: "Assistance documentaire",
     summary:
@@ -70,7 +87,12 @@ export const services: Service[] = [
     cta: "Demander une assistance documentaire",
   },
   {
-    slug: "conformite-reglementaire",
+    slug: "conformite-douaniere",
+    metaTitle: "Conformité douanière et réglementaire au Maroc",
+    metaDescription:
+      "Anticipez les exigences douanières, tarifaires, d'origine et réglementaires applicables à vos produits au Maroc, dans l'UE et au Royaume-Uni.",
+    lead: "Nous vous aidons à identifier et à comprendre les obligations douanières, tarifaires, d'origine et réglementaires applicables à vos marchandises.",
+    faqIds: ["calcul-droits-de-douane", "representation-directe-indirecte"],
     number: 3,
     title: "Conformité douanière et réglementaire",
     summary:
@@ -98,6 +120,11 @@ export const services: Service[] = [
   },
   {
     slug: "commerce-international",
+    metaTitle: "Commerce international Maroc – Europe – Royaume-Uni",
+    metaDescription:
+      "Préparez vos échanges Maroc – Union européenne – Royaume-Uni : accords commerciaux, Incoterms, documents et contraintes logistiques.",
+    lead: "Nous accompagnons la préparation de vos projets d'import-export entre le Maroc, l'Union européenne et le Royaume-Uni : accords, Incoterms, documents et logistique.",
+    faqIds: ["documents-dedouanement", "calcul-droits-de-douane"],
     number: 4,
     title: "Accompagnement du commerce international",
     summary:

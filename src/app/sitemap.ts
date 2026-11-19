@@ -1,11 +1,19 @@
 import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
+import { services } from "@/lib/services";
 import { absoluteUrl } from "@/lib/site";
 
+/** Indexable pages only: drafts and the provisional privacy page are excluded */
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), changeFrequency: "monthly", priority: 1 },
     { url: absoluteUrl("/services"), changeFrequency: "monthly", priority: 0.9 },
+    ...services.map((s) => ({
+      url: absoluteUrl(`/services/${s.slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
+    { url: absoluteUrl("/about"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/faq"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.8 },
@@ -14,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...pages,
     ...posts.map((p) => ({
       url: absoluteUrl(`/blog/${p.slug}`),
-      lastModified: p.published,
+      ...(p.updated || p.published ? { lastModified: p.updated ?? p.published } : {}),
       changeFrequency: "yearly" as const,
       priority: 0.6,
     })),

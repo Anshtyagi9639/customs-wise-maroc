@@ -16,7 +16,7 @@ Cela implique notamment de préciser le lieu effectif où les marchandises seron
 
 Cette disposition renforce la traçabilité des marchandises après leur importation. Les entreprises doivent donc porter une attention particulière aux informations communiquées dans leurs déclarations.
 
-**L'enjeu est aussi financier.** Une fausse déclaration du lieu de stockage ou de transformation constitue une contravention douanière de troisième classe, passible d'une **amende de 30 000 à 60 000 dirhams** (article 297 du Code des douanes).
+**L'enjeu est aussi financier.** Selon les analyses de la circulaire de l'ADII publiées par la presse spécialisée, une fausse déclaration du lieu de stockage ou de transformation constitue une contravention douanière de troisième classe, passible d'une **amende de 30 000 à 60 000 dirhams** (article 297 du Code des douanes). Le montant applicable à une situation donnée doit être vérifié dans les textes en vigueur.
 
 Pour les importateurs, cela signifie qu'il devient essentiel de disposer d'informations précises sur les lieux de stockage et de transformation avant de finaliser leurs formalités.
 
@@ -26,7 +26,7 @@ La Loi de finances 2026 introduit également l'article 76 ter dans le Code des d
 
 Cette disposition prévoit la mise à disposition des importateurs d'une plateforme électronique agréée permettant le dépôt et la transmission automatisée et sécurisée des documents commerciaux devant accompagner les déclarations en détail.
 
-Dans un premier temps, **le recours à cette plateforme est facultatif**. Il s'agit toutefois d'un signal clair : la dématérialisation des documents commerciaux est appelée à se généraliser.
+Selon la presse spécialisée, **le recours à cette plateforme est facultatif dans un premier temps**. Il s'agit toutefois, à notre sens, d'un signal clair : la dématérialisation des documents commerciaux est appelée à se généraliser.
 
 Cette évolution s'inscrit dans la modernisation des procédures douanières et dans la volonté de faciliter le traitement des opérations d'importation.
 
@@ -92,8 +92,17 @@ Pour les entreprises actives dans l'import-export, comprendre ces changements n'
 
 ---
 
-## Sources officielles
+## Sources
+
+### Textes officiels
 
 - [Loi de finances n° 50-25 pour l'année budgétaire 2026](https://adala.justice.gov.ma/api/uploads/2025/12/18/loi%20de%20finances%202026-1766048666612.pdf) (dahir n° 1-25-67 du 10 décembre 2025, BO n° 7465 bis).
 - Circulaire ADII n° 6702/210 du 26 décembre 2025.
 - [Administration des Douanes et Impôts Indirects (ADII)](https://www.douane.gov.ma).
+
+### Presse spécialisée
+
+- Médias24 : [Ce que change la circulaire de la douane sur les dispositions de la loi de finances 2026](https://medias24.com/2025/12/29/ce-que-change-la-circulaire-de-la-douane-sur-les-dispositions-de-la-loi-de-finances-2026-1603817/) (29 décembre 2025).
+- L'Economiste : [Customs: tighter controls and clearer rules from January 1](https://weekly.leconomiste.com/customs-tighter-controls-and-clearer-rules-from-january-1/).
+
+*Cet article présente des informations générales et notre lecture des textes. Il ne constitue pas un avis juridique sur une opération particulière.*

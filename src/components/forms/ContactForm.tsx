@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import { CheckCircle2, AlertTriangle, Loader2, Send } from "lucide-react";
 import { contactSchema, serviceOptions, type ContactInput, type ContactResult } from "@/lib/contact-schema";
 import { submitEnquiry } from "@/app/contact/actions";
 import { buttonClass } from "@/components/ui";
+import { track } from "@/lib/analytics";
 
 const field =
   "mt-1.5 block w-full rounded-md border border-navy-100 bg-white px-3.5 py-2.5 text-ink shadow-sm placeholder:text-muted/60 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/30 aria-[invalid=true]:border-red-600";
@@ -24,6 +25,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 export function ContactForm() {
   const searchParams = useSearchParams();
   const [result, setResult] = useState<ContactResult | null>(null);
+  const started = useRef(false);
 
   const {
     register,
@@ -33,7 +35,7 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", company: "", email: "", phone: "", service: "", message: "", website: "" },
+    defaultValues: { name: "", company: "", email: "", phone: "", service: "", origin: "", destination: "", message: "", website: "" },
   });
 
   // Pre-select the service when arriving from a service CTA (?service=slug)
@@ -47,10 +49,28 @@ export function ContactForm() {
     try {
       const res = await submitEnquiry(data);
       setResult(res);
-      if (res.status === "success") reset();
+      if (res.status === "success") {
+        // Conversion is recorded only once the server confirms the enquiry was delivered
+        track("generate_lead", { service: data.service });
+        reset();
+      } else {
+        track("form_error", { error_type: res.status });
+      }
     } catch {
       setResult({ status: "error" });
+      track("form_error", { error_type: "network" });
     }
+  };
+
+  // Client-side validation failure: report which fields failed (names only, never values)
+  const onInvalid = (errs: Record<string, unknown>) => {
+    track("form_error", { error_type: "validation", fields: Object.keys(errs).join(",") });
+  };
+
+  const onFirstInteraction = () => {
+    if (started.current) return;
+    started.current = true;
+    track("form_start", { form_id: "contact" });
   };
 
   if (result?.status === "success") {
@@ -64,7 +84,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit, onInvalid)} onFocus={onFirstInteraction} noValidate className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="text-sm font-medium text-navy-900">
@@ -96,16 +116,27 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="service" className="text-sm font-medium text-navy-900">
-          Service souhaité <span aria-hidden="true" className="text-accent-600">*</span>
+          Type de demande <span aria-hidden="true" className="text-accent-600">*</span>
         </label>
         <select id="service" className={field} aria-invalid={!!errors.service}
           aria-describedby={errors.service ? "service-error" : undefined} {...register("service")}>
-          <option value="">Choisissez un service…</option>
+          <option value="">Choisissez…</option>
           {serviceOptions.map((o) => (
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
         <FieldError id="service-error" message={errors.service?.message} />
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="origin" className="text-sm font-medium text-navy-900">Pays d&apos;origine des marchandises</label>
+          <input id="origin" className={field} placeholder="Ex. : Maroc" {...register("origin")} />
+        </div>
+        <div>
+          <label htmlFor="destination" className="text-sm font-medium text-navy-900">Pays de destination</label>
+          <input id="destination" className={field} placeholder="Ex. : Royaume-Uni" {...register("destination")} />
+        </div>
       </div>
 
       <div>
@@ -114,7 +145,7 @@ export function ContactForm() {
           <span aria-hidden="true" className="text-accent-600">*</span>
         </label>
         <textarea id="message" rows={6} className={field} aria-invalid={!!errors.message}
-          placeholder="Type de marchandises, origine, destination, volume, calendrier…"
+          placeholder="Type de marchandises, code SH si connu, mode de transport, volume, calendrier…"
           aria-describedby={errors.message ? "message-error" : undefined} {...register("message")} />
         <FieldError id="message-error" message={errors.message?.message} />
       </div>
@@ -130,7 +161,8 @@ export function ContactForm() {
           <input type="checkbox" className="mt-1 h-4 w-4 accent-accent-600" aria-invalid={!!errors.consent}
             aria-describedby={errors.consent ? "consent-error" : undefined} {...register("consent")} />
           <span>
-            J&apos;accepte que Customs Wise utilise ces informations pour répondre à ma demande.{" "}
+            J&apos;accepte que Customs Wise utilise ces informations pour répondre à ma demande (
+            <a href="/confidentialite" className="underline hover:text-navy-900">politique de confidentialité</a>).{" "}
             <span aria-hidden="true" className="text-accent-600">*</span>
           </span>
         </label>

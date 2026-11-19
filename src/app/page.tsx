@@ -6,11 +6,15 @@ import { ServiceCards, FaqList, PostCard, CtaBand } from "@/components/sections"
 import { faqs } from "@/lib/faq";
 import { posts } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
+import { CorridorIllustration } from "@/components/CoverArt";
 
-export const metadata: Metadata = {
-  title: { absolute: site.defaultTitle },
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: site.defaultTitle,
+  description: site.defaultDescription,
+  path: "/",
+  absoluteTitle: true,
+});
 
 const corridors = [
   { label: "Maroc", detail: "Procédures ADII, ports et plateformes logistiques" },
@@ -22,16 +26,17 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="pattern-zellige relative overflow-hidden bg-navy-900 text-white">
+      <section className="surface-dark pattern-zellige relative overflow-hidden bg-navy-900 text-white">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-accent-500/20 blur-3xl"
+          className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-navy-700/40 blur-3xl"
         />
-        <Container className="relative py-20 sm:py-28">
+        <Container className="relative grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-[1.35fr_1fr]">
+          <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
-            Customs Wise Maroc · Tanger
+            Customs Wise Maroc · Maroc · Union européenne · Royaume-Uni
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-6xl">
+          <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-6xl">
             Votre partenaire en douane et en commerce international
           </h1>
           <div className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-navy-100">
@@ -52,6 +57,10 @@ export default function HomePage() {
             <ButtonLink href="/contact" variant="ghost" className="px-7 py-3.5 text-base">
               Contactez notre équipe
             </ButtonLink>
+          </div>
+          </div>
+          <div className="mx-auto w-full max-w-md lg:max-w-none">
+            <CorridorIllustration />
           </div>
         </Container>
       </section>

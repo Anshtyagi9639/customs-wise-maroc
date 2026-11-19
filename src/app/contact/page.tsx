@@ -6,14 +6,14 @@ import { PageHero } from "@/components/sections";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { site, telHref } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact et demande de devis",
   description:
-    "Contactez Customs Wise Maroc pour vos formalités douanières, documents d'import-export et projets de commerce international entre le Maroc, l'UE et le Royaume-Uni.",
-  alternates: { canonical: "/contact" },
-  openGraph: { url: "/contact" },
-};
+    "Demandez un devis à Customs Wise Maroc pour vos formalités douanières, documents d'import-export et projets entre le Maroc, l'UE et le Royaume-Uni.",
+  path: "/contact",
+});
 
 const crumbs = [
   { name: "Accueil", href: "/" },
@@ -42,7 +42,7 @@ export default function ContactPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-xl bg-navy-900 p-7 text-white">
+            <div className="surface-dark rounded-xl bg-navy-900 p-7 text-white">
               <h2 className="text-lg font-semibold">Customs Wise Maroc</h2>
               <ul className="mt-5 space-y-4 text-sm text-navy-100">
                 <li className="flex gap-3">

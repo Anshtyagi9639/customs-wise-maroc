@@ -5,8 +5,8 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const main = tone === "dark" ? "text-navy-900" : "text-white";
   return (
     <Link href="/" className="group inline-flex items-baseline gap-1.5" aria-label="Customs Wise Maroc — accueil">
-      <span className={`text-xl font-extrabold tracking-tight ${main}`}>
-        Customs<span className="text-accent-600">Wise</span>
+      <span className={`font-display text-2xl font-semibold uppercase tracking-wide ${main}`}>
+        Customs<span className={tone === "dark" ? "text-accent-600" : "text-cargo"}>Wise</span>
       </span>
       <span
         className={`rounded-sm px-1.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-widest ${
