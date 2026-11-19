@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
 import { Container } from "@/components/ui";
 import { PageHero } from "@/components/sections";
-import { ContactForm } from "@/components/forms/ContactForm";
+import { EnquiryForm } from "@/components/forms/EnquiryForm";
+import { ContactDetails } from "@/components/enquiry";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
-import { site, telHref } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -21,7 +20,6 @@ const crumbs = [
 ];
 
 export default function ContactPage() {
-  const { phone, email, address } = site.contact;
   return (
     <>
       <PageHero
@@ -36,7 +34,7 @@ export default function ContactPage() {
             <p className="mt-2 text-muted">Les champs marqués d&apos;un * sont obligatoires.</p>
             <div className="mt-8">
               <Suspense fallback={<div className="h-96 animate-pulse rounded-md bg-navy-50" />}>
-                <ContactForm />
+                <EnquiryForm />
               </Suspense>
             </div>
           </div>
@@ -44,28 +42,9 @@ export default function ContactPage() {
           <aside className="space-y-6">
             <div className="surface-dark rounded-xl bg-navy-900 p-7 text-white">
               <h2 className="text-lg font-semibold">Customs Wise Maroc</h2>
-              <ul className="mt-5 space-y-4 text-sm text-navy-100">
-                <li className="flex gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent-500" aria-hidden="true" />
-                  <address className="not-italic">
-                    {address.street}
-                    <br />
-                    {address.postalCode} {address.city}, {address.country}
-                  </address>
-                </li>
-                {phone && (
-                  <li className="flex gap-3">
-                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-accent-500" aria-hidden="true" />
-                    <a href={telHref(phone)} className="hover:text-white hover:underline">{phone}</a>
-                  </li>
-                )}
-                {email && (
-                  <li className="flex gap-3">
-                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-accent-500" aria-hidden="true" />
-                    <a href={`mailto:${email}`} className="hover:text-white hover:underline">{email}</a>
-                  </li>
-                )}
-              </ul>
+              <div className="mt-5 text-sm text-navy-100">
+                <ContactDetails />
+              </div>
             </div>
             <div className="rounded-xl border border-navy-100 bg-sand-50 p-7">
               <h2 className="font-semibold text-navy-900">Pour une réponse plus précise</h2>

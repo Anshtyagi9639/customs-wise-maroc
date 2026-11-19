@@ -43,7 +43,7 @@ export function Analytics() {
     return () => window.removeEventListener(OPEN_CONSENT_EVENT, open);
   }, []);
 
-  // Delegated tracking for phone / email / quote CTA links (no personal data sent)
+  // Delegated tracking for phone / email / WhatsApp / quote CTA links (no personal data sent)
   useEffect(() => {
     if (!enabled) return;
     const onClick = (e: MouseEvent) => {
@@ -53,7 +53,8 @@ export function Analytics() {
       const location = a.closest("header") ? "header" : a.closest("footer") ? "footer" : "content";
       if (href.startsWith("tel:")) track("click_phone", { link_location: location });
       else if (href.startsWith("mailto:")) track("click_email", { link_location: location });
-      else if (href === "/contact" || href.startsWith("/contact?"))
+      else if (href.startsWith("https://wa.me/")) track("click_whatsapp", { link_location: location });
+      else if (href === "/contact" || href.startsWith("/contact?") || href === "/#demande")
         track("click_quote_cta", { link_location: location, link_text: a.textContent?.trim().slice(0, 60) });
     };
     document.addEventListener("click", onClick);

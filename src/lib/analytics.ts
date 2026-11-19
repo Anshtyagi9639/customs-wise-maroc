@@ -15,8 +15,9 @@ export type AnalyticsEvent =
   | "click_phone"
   | "view_service"
   | "view_blog"
-  | "click_quote_cta";
-// "click_whatsapp" intentionally not implemented: WhatsApp contact not approved for public display.
+  | "click_quote_cta"
+  // Only fires when the WhatsApp button is shown (NEXT_PUBLIC_WHATSAPP_NUMBER set after approval)
+  | "click_whatsapp";
 
 type Params = Record<string, string | number | boolean | undefined>;
 

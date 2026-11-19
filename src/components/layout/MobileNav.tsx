@@ -48,7 +48,7 @@ export function MobileNav() {
         <nav
           id="mobile-menu"
           aria-label="Navigation mobile"
-          className="absolute inset-x-0 top-full border-b border-navy-100 bg-white shadow-lg"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6.5rem)] overflow-y-auto border-b border-navy-100 bg-white shadow-lg"
         >
           <ul className="mx-auto max-w-6xl space-y-1 px-4 py-4">
             {nav.map((item) => (
@@ -60,6 +60,20 @@ export function MobileNav() {
                 >
                   {item.label}
                 </Link>
+                {item.children && (
+                  <ul className="mb-2 ml-3 border-l border-navy-100 pl-3">
+                    {item.children.map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          className="block rounded-md px-3 py-2 text-sm text-muted hover:bg-navy-50 hover:text-accent-700"
+                        >
+                          {c.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
             <li className="pt-2">

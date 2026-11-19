@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingChatButton } from "@/components/layout/FloatingChatButton";
 import { SiteNotice } from "@/components/layout/SiteNotice";
 import { Analytics } from "@/components/analytics/Analytics";
 import { JsonLd, organizationLd, websiteLd } from "@/components/seo/JsonLd";
@@ -39,9 +40,21 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0a3542" };
 
+/**
+ * In development only, ask the browser not to auto-translate the page: Chrome's
+ * "Translate to English" rewrites the HTML (lang, texts) before React hydrates,
+ * which triggers a "Hydration failed" overlay. Production keeps translation
+ * available for visitors (React recovers silently there).
+ */
+const devNoTranslate = process.env.NODE_ENV === "development";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className={`${openSans.variable} ${oswald.variable} h-full antialiased`}>
+    <html
+      lang="fr"
+      translate={devNoTranslate ? "no" : undefined}
+      className={`${openSans.variable} ${oswald.variable} h-full antialiased${devNoTranslate ? " notranslate" : ""}`}
+    >
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#contenu"
@@ -55,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <FloatingChatButton />
         <Analytics />
         <JsonLd data={[organizationLd(), websiteLd()]} />
       </body>

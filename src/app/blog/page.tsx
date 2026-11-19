@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui";
-import { PageHero, PostCard, CtaBand } from "@/components/sections";
+import { PageHero, CtaBand } from "@/components/sections";
+import { BlogCard } from "@/components/blocks/BlogCard";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { posts } from "@/lib/blog";
 import { absoluteUrl } from "@/lib/site";
@@ -31,7 +32,7 @@ export default function BlogPage() {
           <h2 className="sr-only">Articles publiés</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {posts.map((p) => (
-              <PostCard key={p.slug} post={p} />
+              <BlogCard key={p.slug} post={p} />
             ))}
           </div>
         </Container>

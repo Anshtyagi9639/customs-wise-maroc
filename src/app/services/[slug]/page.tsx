@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, Info, TrendingUp, Users, HelpCircle } from "lucide-react";
 import { Container, ButtonLink, ServiceGlyph } from "@/components/ui";
-import { PageHero, CtaBand, PostCard } from "@/components/sections";
+import { PageHero, CtaBand } from "@/components/sections";
+import { BlogCard } from "@/components/blocks/BlogCard";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { CoverArt } from "@/components/CoverArt";
 import { TrackOnMount } from "@/components/analytics/Analytics";
@@ -99,7 +100,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           )}
         </div>
 
-        <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
+        <aside className="space-y-6 lg:sticky lg:top-36 lg:self-start">
           <section className="surface-dark rounded-xl bg-navy-900 p-7 text-white shadow-lg sm:p-8" aria-labelledby="scope">
             <h2 id="scope" className="text-2xl font-semibold">Ce que nous prenons en charge</h2>
             <ul className="mt-5 space-y-3">
@@ -130,7 +131,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <h2 id="related-posts" className="text-3xl font-semibold text-navy-900">À lire sur le blog</h2>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {relatedPosts.map((p) => (
-                <PostCard key={p.slug} post={p} />
+                <BlogCard key={p.slug} post={p} />
               ))}
             </div>
           </Container>

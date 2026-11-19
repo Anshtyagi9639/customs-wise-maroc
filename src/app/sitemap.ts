@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
 import { services } from "@/lib/services";
+import { industries } from "@/lib/industries";
 import { absoluteUrl } from "@/lib/site";
 
 /** Indexable pages only: drafts and the provisional privacy page are excluded */
@@ -13,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    { url: absoluteUrl("/corridor-maroc-europe"), changeFrequency: "monthly", priority: 0.8 },
+    ...(industries.length > 0 ? [{ url: absoluteUrl("/secteurs"), changeFrequency: "monthly" as const, priority: 0.7 }] : []),
     { url: absoluteUrl("/about"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/faq"), changeFrequency: "yearly", priority: 0.6 },

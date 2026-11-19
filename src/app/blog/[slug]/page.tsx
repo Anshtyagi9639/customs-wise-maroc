@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AlertTriangle, ArrowRight, CalendarDays, Clock, UserRound } from "lucide-react";
 import { Container, ButtonLink, ServiceGlyph } from "@/components/ui";
-import { Breadcrumbs, PostCard } from "@/components/sections";
+import { Breadcrumbs, CtaBand } from "@/components/sections";
+import { BlogCard } from "@/components/blocks/BlogCard";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { CoverArt } from "@/components/CoverArt";
 import { TrackOnMount } from "@/components/analytics/Analytics";
@@ -101,7 +102,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
       <Container className="grid max-w-6xl gap-12 py-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article className="article max-w-3xl" dangerouslySetInnerHTML={{ __html: html }} />
 
-        <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start" aria-label="Services liés">
+        <aside className="space-y-6 lg:sticky lg:top-36 lg:self-start" aria-label="Services liés">
           <div className="rounded-xl border border-navy-100 bg-sand-50 p-6">
             <h2 className="font-sans text-base font-semibold text-navy-900">Services liés</h2>
             <ul className="mt-4 space-y-3">
@@ -142,12 +143,14 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             </div>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {related.map((p) => (
-                <PostCard key={p.slug} post={p} />
+                <BlogCard key={p.slug} post={p} />
               ))}
             </div>
           </Container>
         </section>
       )}
+
+      <CtaBand />
 
       <TrackOnMount event="view_blog" params={{ article_slug: post.slug, article_status: post.status }} />
       <JsonLd

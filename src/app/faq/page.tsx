@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui";
-import { PageHero, FaqList, CtaBand } from "@/components/sections";
+import { PageHero, CtaBand } from "@/components/sections";
+import { FaqAccordion } from "@/components/blocks/FaqAccordion";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { faqs } from "@/lib/faq";
 import { pageMetadata } from "@/lib/seo";
@@ -27,7 +28,7 @@ export default function FaqPage() {
       />
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <FaqList items={faqs} headingLevel={2} defaultOpen />
+          <FaqAccordion items={faqs} headingLevel={2} defaultOpen />
         </Container>
       </section>
       <CtaBand title="Une question sur votre expédition ?" />

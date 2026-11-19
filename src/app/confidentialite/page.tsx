@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui";
-import { PageHero } from "@/components/sections";
+import { PageHero, CtaBand } from "@/components/sections";
 import { ManageConsentLink } from "@/components/analytics/Analytics";
 import { pageMetadata } from "@/lib/seo";
 import { analyticsEnabled } from "@/lib/analytics";
@@ -85,6 +85,7 @@ export default function PrivacyPage() {
           <p>Ce site est hébergé par Vercel Inc. [à confirmer lors de la mise en ligne].</p>
         </div>
       </Container>
+      <CtaBand />
     </>
   );
 }

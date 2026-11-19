@@ -22,7 +22,11 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-export function ContactForm() {
+/**
+ * Enquiry form: client-side Zod validation, server action delivery, honeypot field,
+ * consent checkbox. Success is shown only after the server confirms delivery.
+ */
+export function EnquiryForm() {
   const searchParams = useSearchParams();
   const [result, setResult] = useState<ContactResult | null>(null);
   const started = useRef(false);

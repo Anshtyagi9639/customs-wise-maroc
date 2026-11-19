@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { allPosts } from "@/lib/posts";
 import { services } from "@/lib/services";
+import { industries } from "@/lib/industries";
 
 const known: Record<string, Set<string>> = {
   blog: new Set(allPosts.map((p) => p.slug)),
@@ -11,8 +12,12 @@ const known: Record<string, Set<string>> = {
  * Unknown slugs under /blog and /services are rewritten to a non-existent route
  * so they get the custom 404 page with a real 404 status (partial prerendering
  * would otherwise stream a 200 before notFound() runs).
+ * /secteurs gets the same treatment while no approved sector exists yet.
  */
 export function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname.replace(/\/$/, "") === "/secteurs" && industries.length === 0) {
+    return NextResponse.rewrite(new URL("/__introuvable", request.url));
+  }
   const [, section, ...rest] = request.nextUrl.pathname.replace(/\/$/, "").split("/");
   const slug = rest.join("/");
   if (slug && known[section] && !known[section].has(slug)) {
@@ -21,4 +26,4 @@ export function proxy(request: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = { matcher: ["/blog/:slug+", "/services/:slug+"] };
+export const config = { matcher: ["/blog/:slug+", "/services/:slug+", "/secteurs"] };

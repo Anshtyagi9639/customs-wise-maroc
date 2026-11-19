@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ClipboardList, FileSearch, MessagesSquare } from "lucide-react";
-import { Container, ButtonLink, SectionHeading } from "@/components/ui";
-import { PageHero, CtaBand, FaqList, ServiceCards } from "@/components/sections";
+import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, MessagesSquare } from "lucide-react";
+import { Container, ButtonLink, SectionHeading, ServiceGlyph } from "@/components/ui";
+import { PageHero, CtaBand } from "@/components/sections";
+import { FaqAccordion } from "@/components/blocks/FaqAccordion";
 import { JsonLd, breadcrumbLd } from "@/components/seo/JsonLd";
 import { CoverArt } from "@/components/CoverArt";
 import { services } from "@/lib/services";
@@ -54,21 +55,70 @@ export default function ServicesPage() {
         <ButtonLink href="#services" variant="ghost">Voir les services</ButtonLink>
       </PageHero>
 
-      <section id="services" aria-labelledby="services-title" className="scroll-mt-24 py-16 sm:py-20">
+      {/* Anchor links to each service section */}
+      <nav aria-label="Accès rapide aux services" className="sticky top-[6.5rem] z-30 border-b border-navy-100 bg-white/95 backdrop-blur lg:top-[7.5rem]">
         <Container>
-          <SectionHeading
-            id="services-title"
-            eyebrow="Quatre services"
-            title="Vos formalités, une seule équipe"
-            intro="Chaque service peut être mobilisé seul ou en complément des autres, selon la nature de votre opération."
-          />
-          <div className="mt-12">
-            <ServiceCards />
-          </div>
+          <ul className="-mx-1 flex gap-1 overflow-x-auto py-3 text-sm">
+            {services.map((s) => (
+              <li key={s.slug} className="shrink-0">
+                <a href={`#${s.slug}`} className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-medium text-navy-900 hover:bg-navy-50 hover:text-accent-700">
+                  <ServiceGlyph icon={s.icon} className="h-4 w-4 text-accent-600" />
+                  {s.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </Container>
-      </section>
+      </nav>
 
-      <section aria-labelledby="steps-title" className="bg-sand-50 py-16 sm:py-20">
+      <div id="services">
+        {services.map((s, i) => (
+          <section
+            key={s.slug}
+            id={s.slug}
+            aria-labelledby={`${s.slug}-title`}
+            className={`scroll-mt-44 py-16 sm:py-20 ${i % 2 ? "bg-sand-50" : ""}`}
+          >
+            <Container className="grid items-start gap-10 lg:grid-cols-2">
+              <div className={i % 2 ? "lg:order-2" : ""}>
+                <p className="text-xs font-bold uppercase tracking-widest text-accent-600">Service 0{s.number}</p>
+                <h2 id={`${s.slug}-title`} className="mt-2 text-3xl font-semibold text-navy-900">{s.title}</h2>
+                <p className="mt-4 text-lg leading-relaxed text-muted">{s.intro[0]}</p>
+                <p className="mt-4 leading-relaxed text-muted">
+                  <span className="font-semibold text-navy-900">À qui s&apos;adresse ce service ? </span>
+                  {s.audience}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <ButtonLink href={`/services/${s.slug}`} variant="secondary">
+                    Voir le détail <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </ButtonLink>
+                  <Link href={`/contact?service=${s.slug}`} className="inline-flex items-center px-2 py-3 text-sm font-semibold text-accent-700 hover:underline">
+                    {s.cta}
+                  </Link>
+                </div>
+              </div>
+              <div className={`overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-navy-100 ${i % 2 ? "lg:order-1" : ""}`}>
+                <div className="aspect-[20/9]">
+                  <CoverArt variant={s.icon} alt="" />
+                </div>
+                <div className="p-7">
+                  <h3 className="font-sans text-base font-semibold text-navy-900">Ce que nous prenons en charge</h3>
+                  <ul className="mt-4 space-y-2.5">
+                    {s.items.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent-600" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </Container>
+          </section>
+        ))}
+      </div>
+
+      <section aria-labelledby="steps-title" className="border-t border-navy-100 bg-navy-50 py-16 sm:py-20">
         <Container>
           <SectionHeading id="steps-title" eyebrow="Démarche" title="Comment se déroule un accompagnement" />
           <ol className="mt-10 grid gap-6 md:grid-cols-3">
@@ -96,7 +146,7 @@ export default function ServicesPage() {
               Toutes les questions <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <FaqList items={faqs} />
+          <FaqAccordion items={faqs} />
         </Container>
       </section>
 

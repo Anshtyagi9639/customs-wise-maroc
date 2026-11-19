@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Plus, Info } from "lucide-react";
-import { faqDisclaimer, type Faq } from "@/lib/faq";
-import { services } from "@/lib/services";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import type { Post } from "@/lib/blog";
 import { Container, ButtonLink } from "@/components/ui";
-import { CoverArt } from "@/components/CoverArt";
 
 export type Crumb = { name: string; href: string };
 
@@ -55,73 +52,6 @@ export function PageHero({
   );
 }
 
-export function ServiceCards() {
-  return (
-    <ul className="grid gap-6 sm:grid-cols-2">
-      {services.map((s) => (
-        <li key={s.slug}>
-          <Link
-            href={`/services/${s.slug}`}
-            className="group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-accent-600/40 hover:shadow-md"
-          >
-            <div className="aspect-[20/9] overflow-hidden">
-              <CoverArt variant={s.icon} alt="" className="transition-transform duration-500 group-hover:scale-[1.03]" />
-            </div>
-            <div className="flex flex-1 flex-col p-7">
-              <p className="text-xs font-bold uppercase tracking-widest text-accent-600">Service 0{s.number}</p>
-              <h3 className="mt-2 text-xl font-semibold text-navy-900">{s.title}</h3>
-              <p className="mt-3 flex-1 leading-relaxed text-muted">{s.summary}</p>
-              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent-700">
-                Découvrir ce service
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-              </span>
-            </div>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-export function FaqList({
-  items,
-  headingLevel = 3,
-  defaultOpen = false,
-}: {
-  items: Faq[];
-  headingLevel?: 2 | 3;
-  /** Open all answers (FAQ page: readable without interaction, anchor links land on visible text) */
-  defaultOpen?: boolean;
-}) {
-  const Heading = headingLevel === 2 ? "h2" : "h3";
-  return (
-    <div>
-      <div className="divide-y divide-navy-100 rounded-xl border border-navy-100 bg-white">
-        {items.map((f) => (
-          <details key={f.id} id={f.id} open={defaultOpen || undefined} className="group scroll-mt-28 p-6 [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer items-start justify-between gap-4 text-lg font-semibold text-navy-900">
-              <Heading className="font-sans text-lg font-semibold">{f.question}</Heading>
-              <Plus
-                className="mt-1 h-5 w-5 shrink-0 text-accent-600 transition-transform group-open:rotate-45"
-                aria-hidden="true"
-              />
-            </summary>
-            <div className="mt-4 space-y-3 leading-relaxed text-muted">
-              {f.answer.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-          </details>
-        ))}
-      </div>
-      <p className="mt-4 flex gap-2 text-sm text-muted">
-        <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-        {faqDisclaimer}
-      </p>
-    </div>
-  );
-}
-
 export function PostMeta({ post }: { post: Post }) {
   return (
     <>
@@ -132,35 +62,6 @@ export function PostMeta({ post }: { post: Post }) {
       )}{" "}
       · {post.readingMinutes} min de lecture
     </>
-  );
-}
-
-export function PostCard({ post }: { post: Post }) {
-  return (
-    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm transition hover:shadow-md">
-      <div className="aspect-[20/9] overflow-hidden">
-        <CoverArt variant={post.cover.variant} alt="" />
-      </div>
-      <div className="flex flex-1 flex-col p-7">
-        <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">{post.category}</p>
-        <h3 className="mt-3 text-xl font-semibold leading-snug text-navy-900">
-          <Link href={`/blog/${post.slug}`} className="hover:text-accent-700">
-            {post.title}
-          </Link>
-        </h3>
-        <p className="mt-3 flex-1 leading-relaxed text-muted">{post.excerpt}</p>
-        <p className="mt-5 text-sm text-muted">
-          <PostMeta post={post} />
-        </p>
-        <Link
-          href={`/blog/${post.slug}`}
-          className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-700 hover:underline"
-          aria-label={`Lire l'article : ${post.title}`}
-        >
-          Lire l&apos;article <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
-      </div>
-    </article>
   );
 }
 
