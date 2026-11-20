@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens (SITE-BLUEPRINT.md §3). Keep the token NAMES when re-branding:
+ * components only use these names. Tailwind's default palette is removed, so
+ * only brand colours are available as utilities (bg-ship, text-atlantic…).
+ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-overnight: #000315; /* darkest text and background */
+  --color-ship: #0a3542; /* dark surfaces, headings, theme colour */
+  --color-breeze: #4a6876; /* end of the dark gradient */
+  --color-atlantic: #176a90; /* links, accent text, outline buttons */
+  --color-cargo: #f9ed32; /* primary button, focus ring, highlights */
+  --color-freight: #f79420; /* kickers on dark, warnings */
+  --color-haul: #fbb03a; /* primary button hover */
+  --color-holyhead: #2eacb1; /* secondary accent */
+  --color-transit: #3eb661; /* secondary accent, success */
+  --color-starlight: #bdccd4; /* muted text on dark */
+  --color-pebble: #747576; /* muted text on light (large text only) */
+  --color-salt: #ffffff; /* white */
+  --color-mist: #f1f5f7; /* light section background */
+  --color-line: #d5dfe4; /* hairlines, borders */
+  --color-ink-soft: #3c4d55; /* body text */
+  --color-error: #b3261e; /* errors */
+
+  --font-sans: var(--font-open-sans), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-oswald), "Arial Narrow", "Segoe UI", sans-serif;
+
+  --radius-brand: 6px;
+  --shadow-card: 0 1px 2px rgb(10 53 66 / 0.06), 0 8px 24px -12px rgb(10 53 66 / 0.18);
+}
+
+:root {
+  /* 135° brand gradient used by .bg-clearance */
+  --clearance: linear-gradient(135deg, var(--color-overnight) 0%, var(--color-ship) 55%, var(--color-breeze) 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+body {
+  background: var(--color-salt);
+  color: var(--color-ink-soft);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.005em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-atlantic);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Brand-yellow focus ring on dark surfaces */
+.bg-clearance :focus-visible,
+.surface-dark :focus-visible {
+  outline-color: var(--color-cargo);
+}
+
+@layer components {
+  /* Page width with side gutters — every section's inner wrapper */
+  .container-site {
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .container-site {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 64rem) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Dark gradient section: white text, cargo focus ring */
+  .bg-clearance {
+    background: var(--clearance);
+    color: var(--color-salt);
+  }
+
+  /* Decorative zellige-inspired pattern, layered on dark bands */
+  .pattern-zellige {
+    background-image:
+      radial-gradient(circle at 25% 25%, rgb(255 255 255 / 0.06) 2px, transparent 2.5px),
+      radial-gradient(circle at 75% 75%, rgb(255 255 255 / 0.06) 2px, transparent 2.5px),
+      linear-gradient(45deg, rgb(255 255 255 / 0.03) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.03) 75%),
+      linear-gradient(-45deg, rgb(255 255 255 / 0.03) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.03) 75%);
+    background-size: 40px 40px;
+  }
+  .bg-clearance.pattern-zellige {
+    background-image:
+      radial-gradient(circle at 25% 25%, rgb(255 255 255 / 0.06) 2px, transparent 2.5px),
+      radial-gradient(circle at 75% 75%, rgb(255 255 255 / 0.06) 2px, transparent 2.5px),
+      var(--clearance);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+  }
+
+  /* Long-form article typography (blog posts rendered from Markdown) */
+  .prose-cw {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink-soft);
+  }
+  .prose-cw > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-cw .lede,
+  .prose-cw > p:first-child {
+    font-size: 1.2rem;
+    color: var(--color-overnight);
+  }
+  .prose-cw h2 {
+    margin-top: 2.2em;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ship);
+  }
+  .prose-cw h3 {
+    margin-top: 1.6em;
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-ship);
+  }
+  .prose-cw ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  .prose-cw ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .prose-cw li + li {
+    margin-top: 0.4em;
+  }
+  .prose-cw li::marker {
+    color: var(--color-atlantic);
+  }
+  .prose-cw a {
+    color: var(--color-atlantic);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-cw a:hover {
+    color: var(--color-ship);
+  }
+  .prose-cw strong {
+    color: var(--color-ship);
+  }
+  .prose-cw hr {
+    margin: 2.5em 0;
+    border-color: var(--color-line);
+  }
+  .prose-cw .callout,
+  .prose-cw blockquote {
+    border-left: 4px solid var(--color-cargo);
+    background: var(--color-mist);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-brand);
+  }
+
+  /* Responsive bordered table; `wide` scrolls horizontally on small screens */
+  .table-cw,
+  .prose-cw table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .table-cw table,
+  .prose-cw table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .table-cw.wide table {
+    min-width: 40rem;
+  }
+  .table-cw th,
+  .table-cw td,
+  .prose-cw th,
+  .prose-cw td {
+    border: 1px solid var(--color-line);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .table-cw thead th,
+  .prose-cw thead th {
+    background: var(--color-ship);
+    color: var(--color-salt);
+  }
+}
+
+/* ── Motion (CSS only, all disabled under prefers-reduced-motion) ─────────── */
+
+/* Page entrance (app/template.tsx) */
+@keyframes cw-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: cw-enter 0.35s ease-out both;
+}
+
+/* Scroll reveal: only active once JS has added html.js-reveal, so content stays visible without JS */
+html.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+html.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animated route lines in the corridor illustration */
+@keyframes cw-route {
+  to {
+    stroke-dashoffset: -36;
+  }
+}
+.route-line {
+  animation: cw-route 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .page-enter,
+  .route-line {
+    animation: none;
+  }
+  html.js-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

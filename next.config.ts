@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Article bodies are read from disk at runtime: make sure Vercel bundles them with the function
   outputFileTracingIncludes: {
-    "/blog/[slug]": ["./src/content/blog/**/*.md"],
+    "/blog/[slug]": ["./lib/content/blog/**/*.md"],
   },
   turbopack: {
     rules: {
@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
   // Slug renamed before launch (former name of the compliance service)
   async redirects() {
     return [
+      // Blueprint path for the FAQ page
+      { source: "/faqs", destination: "/faq", permanent: true },
       {
         source: "/services/conformite-reglementaire",
         destination: "/services/conformite-douaniere",
