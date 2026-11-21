@@ -82,6 +82,21 @@ proxy.ts                  404 réelles pour slugs inconnus et /secteurs vide
   - `status: "draft"` → accessible par URL avec bandeau « brouillon », `noindex`, exclu du sitemap et des listes.
   - `status: "published"` → indexé, listé (du plus récent au plus ancien), `BlogPosting`. Renseigner `published` (ISO) uniquement si la date est vérifiée.
 
+## Logo et icônes
+
+Aucun logo officiel n'a été fourni : le site utilise une **marque provisoire « CW »** (jaune cargo sur bleu ship), dessinée par nous, avec le logotype texte « CUSTOMSWISE MAROC ».
+
+| Fichier | Usage |
+|---|---|
+| `app/favicon.ico` (16/32/48 px), `app/icon.svg` | Icône d'onglet du navigateur |
+| `app/apple-icon.png` (180 px) | Écran d'accueil iPhone/iPad |
+| `public/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png` | Manifest (« Ajouter à l'écran d'accueil »), logo des données structurées |
+| `public/logos/customs-wise-maroc.svg`, `customs-wise-maroc-mark.svg` | Logo complet et symbole, pour documents et réseaux sociaux |
+| `components/ui/logo.tsx` (`Logo`, `LogoMark`) | En-tête et pied de page |
+| `app/opengraph-image.tsx` | Image de partage (1200×630) |
+
+Tous ces fichiers sont générés par `python scripts/generate-brand-icons.py .` (Pillow requis). **Pour passer au logo officiel :** remplacer les fichiers ci-dessus (mêmes noms et tailles), puis le SVG de `LogoMark` et celui de l'image de partage.
+
 ## Variables d'environnement
 
 Aucune n'est obligatoire pour construire et faire fonctionner le site. Voir `.env.example`.

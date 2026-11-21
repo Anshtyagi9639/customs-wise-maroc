@@ -22,6 +22,19 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          {/* Provisional brand mark (same geometry as app/icon.svg) */}
+          <svg width="76" height="76" viewBox="0 0 64 64">
+            <rect width="64" height="64" rx="13" fill="#0a3542" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+            <path d="M29.13 23.87 A11.5 11.5 0 1 0 29.13 40.13" fill="none" stroke="#f9ed32" strokeWidth="6.5" strokeLinecap="round" />
+            <path
+              d="M35.5 21 L40.5 43 L46 30 L51.5 43 L56.5 21"
+              fill="none"
+              stroke="#f9ed32"
+              strokeWidth="6.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
           <div style={{ display: "flex", fontSize: 44, fontWeight: 700, letterSpacing: 2 }}>
             CUSTOMS<span style={{ color: "#f9ed32" }}>WISE</span>
           </div>

@@ -23,6 +23,8 @@ export function organizationSchema() {
     "@id": absoluteUrl("/#organization"),
     name: site.name,
     url: site.url,
+    // Provisional mark until the official logo is supplied (raster, ≥112px as Google requires)
+    logo: absoluteUrl("/icons/icon-512.png"),
     description: site.defaultDescription,
     parentOrganization: { "@type": "Organization", name: site.brand, url: site.mainSite },
     address: offices.map((o) => ({
